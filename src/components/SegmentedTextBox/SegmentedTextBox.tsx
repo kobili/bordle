@@ -10,8 +10,11 @@ type Props = {
 
 
 const isAlphabetical = (character: string) => {
-    const alphabetical = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-    return alphabetical.includes(character);
+    const alphabet = "abcdefghijklmnopqrstuvwxyz";
+    const lowerCaseAlphabetArray = alphabet.split('');
+    const upperCaseAlphabetArray = alphabet.toUpperCase().split('');
+
+    return lowerCaseAlphabetArray.includes(character) || upperCaseAlphabetArray.includes(character);
 }
 
 export const SegmentedTextBox = (props: Props) => {
@@ -39,39 +42,37 @@ export const SegmentedTextBox = (props: Props) => {
     }
 
     useEffect(() => {
-        window.addEventListener('keydown', handleEvent);
-    }, []);
+        window.addEventListener('keydown', (event: KeyboardEvent) => {
+            if (props.isActive) {
 
-    const handleEvent = (event: KeyboardEvent) => {
-        if (props.isActive) {
-
-            let currentInputCharacters = [...inputCharactersRef.current];
-            let currentSquareIndex = activeSquareIndexRef.current;
-
-            if (event.key === 'Backspace' && currentSquareIndex >= 0) {
-                if (currentInputCharacters[currentSquareIndex] === '') {
-                    // delete the previous square if index != 0
-                    if (currentSquareIndex !== 0) {
-                        currentInputCharacters[currentSquareIndex - 1] = '';
+                let currentInputCharacters = [...inputCharactersRef.current];
+                let currentSquareIndex = activeSquareIndexRef.current;
+    
+                if (event.key === 'Backspace' && currentSquareIndex >= 0) {
+                    if (currentInputCharacters[currentSquareIndex] === '') {
+                        // delete the previous square if index != 0
+                        if (currentSquareIndex !== 0) {
+                            currentInputCharacters[currentSquareIndex - 1] = '';
+                            setInputCharacters(currentInputCharacters);
+                            setActiveSquareIndex(currentSquareIndex - 1);
+                        }
+                    } else {
+                        // delete the current square
+                        currentInputCharacters[currentSquareIndex] = '';
                         setInputCharacters(currentInputCharacters);
-                        setActiveSquareIndex(currentSquareIndex - 1);
+                        setActiveSquareIndex(currentSquareIndex);
                     }
-                } else {
-                    // delete the current square
-                    currentInputCharacters[currentSquareIndex] = '';
-                    setInputCharacters(currentInputCharacters);
-                    setActiveSquareIndex(currentSquareIndex);
-                }
-            } else if (isAlphabetical(event.key) && currentSquareIndex <= props.numCharacter - 1) {
-                // only update the last square if it is empty
-                if (currentSquareIndex !== props.numCharacter - 1 || currentInputCharacters[props.numCharacter - 1] === '') {
-                    currentInputCharacters[currentSquareIndex] = event.key.toUpperCase();
-                    setInputCharacters(currentInputCharacters);
-                    setActiveSquareIndex(currentSquareIndex === props.numCharacter - 1 ? currentSquareIndex : currentSquareIndex + 1);
+                } else if (isAlphabetical(event.key) && currentSquareIndex <= props.numCharacter - 1) {
+                    // only update the last square if it is empty
+                    if (currentSquareIndex !== props.numCharacter - 1 || currentInputCharacters[props.numCharacter - 1] === '') {
+                        currentInputCharacters[currentSquareIndex] = event.key.toUpperCase();
+                        setInputCharacters(currentInputCharacters);
+                        setActiveSquareIndex(currentSquareIndex === props.numCharacter - 1 ? currentSquareIndex : currentSquareIndex + 1);
+                    }
                 }
             }
-        }
-    }
+        });
+    }, []);
 
     return (
         <div className="segmented-text-box">
