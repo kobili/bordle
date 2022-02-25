@@ -8,7 +8,6 @@ type Props = {
     isActive: boolean;
 }
 
-
 const isAlphabetical = (character: string) => {
     const alphabet = "abcdefghijklmnopqrstuvwxyz";
     const lowerCaseAlphabetArray = alphabet.split('');
