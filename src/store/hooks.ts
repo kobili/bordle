@@ -9,14 +9,8 @@ type KeyPressState = {
     key: string;
 }
 
-const initialKeyPressState: KeyPressState = {
-    key: ""
-}
-
 export const useKeyPress = () => {
-    const [keyPressed, setKeyPressed] = useState(initialKeyPressState);
-
-    
+    const [keyPressed, setKeyPressed] = useState({key: ""} as KeyPressState);
 
     const downHandler = (event: KeyboardEvent ) => {
         setKeyPressed({
