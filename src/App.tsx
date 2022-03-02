@@ -1,8 +1,6 @@
-import React from 'react';
 import './App.css';
 
 import { SegmentedTextBox } from './components/SegmentedTextBox/SegmentedTextBox';
-import ReactCodeInput from 'react-code-input'
 
 function App() {
   return (
