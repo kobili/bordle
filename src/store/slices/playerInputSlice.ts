@@ -32,6 +32,7 @@ export const { addGuess, clearGuesses } = playerInputSlice.actions;
 // selectors
 export const selectGuesses = (state: RootState) => state.playerInput.guesses;
 export const selectNumGuesses = (state: RootState) => state.playerInput.guesses.length;
+export const selectCurrentGuessNum = selectNumGuesses;
 export const selectGuessAtIndex = (state: RootState, index: number) => state.playerInput.guesses[index];
 
 // reducer

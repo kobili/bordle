@@ -3,8 +3,9 @@ import { InputBox } from "./InputBox";
 import { useAppDispatch, useKeyPress } from "../../store/hooks";
 
 import './style.css';
-import { addGuess } from "../../store/slices/playerInputSlice";
+import { addGuess, selectCurrentGuessNum } from "../../store/slices/playerInputSlice";
 import { isValidWord } from "../../utils/words/wordsUtils";
+import { useSelector } from "react-redux";
 
 type Props = {
     numCharacter: number;
@@ -22,6 +23,7 @@ const isAlphabetical = (character: string) => {
 
 export const SegmentedTextBox = (props: Props) => {
     const dispatch = useAppDispatch();
+    const currentGuess = useSelector(selectCurrentGuessNum);
 
     const numbers: number[] = [];
     const initialInputs: string[] = [];
@@ -45,9 +47,7 @@ export const SegmentedTextBox = (props: Props) => {
         _setActiveSquareIndex(value);
     }
 
-
     const keyPress = useKeyPress();
-    // console.log(keyPress)
 
     useEffect(() => {
         if (props.isActive) {
@@ -89,7 +89,12 @@ export const SegmentedTextBox = (props: Props) => {
 
     return (
         <div className="segmented-text-box">
-            {numbers.map(num => <InputBox key={num} currentLetter={inputCharacters[num]}></InputBox>)}
+            {numbers.map(num => 
+                <InputBox 
+                    key={num} 
+                    currentLetter={inputCharacters[num]} 
+                    isLockedIn={props.lineNumber < currentGuess && !props.isActive}/>)
+            }
         </div>
     );
 }
