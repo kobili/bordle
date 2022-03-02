@@ -7,7 +7,7 @@ export const store = configureStore({
         playerInput: playerInputReducer,
         gameState: gameStateReducer
     }
-})
+});
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
