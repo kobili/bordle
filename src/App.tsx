@@ -1,12 +1,12 @@
 import './App.css';
 
 import { SegmentedTextBox } from './components/SegmentedTextBox/SegmentedTextBox';
+import { GameBoard } from './components/GameBoard/gameBoard';
 
 function App() {
   return (
     <div className="App">
-      <SegmentedTextBox numCharacter={5} isActive={true} />
-      <SegmentedTextBox numCharacter={5} isActive={false} />
+      <GameBoard numGuesses={6} numChars={5}></GameBoard>
     </div>
   );
 }
