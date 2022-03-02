@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+import { isValidWord } from "../../utils/words/wordsUtils";
 
 export type PlayerInput = {
     guesses: string[],
@@ -14,7 +15,10 @@ export const playerInputSlice = createSlice({
     initialState,
     reducers: {
         addGuess: (state, action: PayloadAction<string>) => {
-            state.guesses.push(action.payload);
+            const word = action.payload;
+            if (isValidWord(word)) {
+                state.guesses.push(action.payload);
+            }
         },
         clearGuesses: state => {
             state.guesses = [];
