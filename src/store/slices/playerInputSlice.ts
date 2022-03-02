@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { isValidWord } from "../../utils/words/wordsUtils";
 
@@ -32,6 +32,7 @@ export const { addGuess, clearGuesses } = playerInputSlice.actions;
 // selectors
 export const selectGuesses = (state: RootState) => state.playerInput.guesses;
 export const selectNumGuesses = (state: RootState) => state.playerInput.guesses.length;
+export const selectGuessAtIndex = (state: RootState, index: number) => state.playerInput.guesses[index];
 
 // reducer
 export default playerInputSlice.reducer;

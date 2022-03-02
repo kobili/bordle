@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { InputBox } from "./InputBox";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useKeyPress } from "../../store/hooks";
 
 import './style.css';
 import { addGuess } from "../../store/slices/playerInputSlice";
@@ -9,7 +9,7 @@ import { isValidWord } from "../../utils/words/wordsUtils";
 type Props = {
     numCharacter: number;
     isActive: boolean;
-    key: number;
+    lineNumber: number;
 }
 
 const isAlphabetical = (character: string) => {
@@ -45,46 +45,47 @@ export const SegmentedTextBox = (props: Props) => {
         _setActiveSquareIndex(value);
     }
 
-    useEffect(() => {
-        window.addEventListener('keydown', (event: KeyboardEvent) => {
-            if (props.isActive) {
 
-                let currentInputCharacters = [...inputCharactersRef.current];
-                let currentSquareIndex = activeSquareIndexRef.current;
-    
-                if (event.key === 'Backspace' && currentSquareIndex >= 0) {
-                    if (currentInputCharacters[currentSquareIndex] === '') {
-                        // delete the previous square if index != 0
-                        if (currentSquareIndex !== 0) {
-                            currentInputCharacters[currentSquareIndex - 1] = '';
-                            setInputCharacters(currentInputCharacters);
-                            setActiveSquareIndex(currentSquareIndex - 1);
-                        }
-                    } else {
-                        // delete the current square
-                        currentInputCharacters[currentSquareIndex] = '';
+    const keyPress = useKeyPress();
+    console.log(keyPress)
+
+    useEffect(() => {
+        if (props.isActive) {
+            
+            let currentInputCharacters = [...inputCharactersRef.current];
+            let currentSquareIndex = activeSquareIndexRef.current;
+
+            if (keyPress.key === 'Backspace' && currentSquareIndex >= 0) {
+                if (currentInputCharacters[currentSquareIndex] === '') {
+                    // delete the previous square if index != 0
+                    if (currentSquareIndex !== 0) {
+                        currentInputCharacters[currentSquareIndex - 1] = '';
                         setInputCharacters(currentInputCharacters);
-                        setActiveSquareIndex(currentSquareIndex);
+                        setActiveSquareIndex(currentSquareIndex - 1);
                     }
-                } else if (isAlphabetical(event.key) && currentSquareIndex <= props.numCharacter - 1) {
-                    // only update the last square if it is empty
-                    if (currentSquareIndex !== props.numCharacter - 1 || currentInputCharacters[props.numCharacter - 1] === '') {
-                        currentInputCharacters[currentSquareIndex] = event.key.toUpperCase();
-                        setInputCharacters(currentInputCharacters);
-                        setActiveSquareIndex(currentSquareIndex === props.numCharacter - 1 ? currentSquareIndex : currentSquareIndex + 1);
-                    }
-                } else if (event.key === 'Enter') {
-                    const guess = currentInputCharacters.join('');
-                    if (isValidWord(guess)) {
-                        dispatch(addGuess(guess));
-                    } else {
-                        alert(`${guess} is not a valid word`);  // TODO: replace this with something unobstructive
-                    }
-                    
+                } else {
+                    // delete the current square
+                    currentInputCharacters[currentSquareIndex] = '';
+                    setInputCharacters(currentInputCharacters);
+                    setActiveSquareIndex(currentSquareIndex);
+                }
+            } else if (isAlphabetical(keyPress.key) && currentSquareIndex <= props.numCharacter - 1) {
+                // only update the last square if it is empty
+                if (currentSquareIndex !== props.numCharacter - 1 || currentInputCharacters[props.numCharacter - 1] === '') {
+                    currentInputCharacters[currentSquareIndex] = keyPress.key.toUpperCase();
+                    setInputCharacters(currentInputCharacters);
+                    setActiveSquareIndex(currentSquareIndex === props.numCharacter - 1 ? currentSquareIndex : currentSquareIndex + 1);
+                }
+            } else if (keyPress.key === 'Enter') {
+                const guess = currentInputCharacters.join('');
+                if (isValidWord(guess)) {
+                    dispatch(addGuess(guess));
+                } else {
+                    alert(`${guess} is not a valid word`);  // TODO: replace this with something unobstructive
                 }
             }
-        });
-    }, []);
+        }
+    }, [keyPress]);
 
     return (
         <div className="segmented-text-box">
