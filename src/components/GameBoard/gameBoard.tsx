@@ -2,7 +2,7 @@ import { SegmentedTextBox } from "../SegmentedTextBox/SegmentedTextBox";
 import { useSelector } from "react-redux";
 
 import './gameBoard.css';
-import { selectNumGuesses } from "../../store/slices/playerInputSlice";
+import { selectCurrentGuessNum } from "../../store/slices/playerInputSlice";
 
 export type GameBoardProps = {
     numGuesses: number,
@@ -11,7 +11,7 @@ export type GameBoardProps = {
 
 export const GameBoard = (props: GameBoardProps) => {
 
-    const currentGuessNumber = useSelector(selectNumGuesses);
+    const currentGuessNumber = useSelector(selectCurrentGuessNum);  // will re-render after each guess
     const numbers: number[] = [];
 
     for (let i = 0; i < props.numGuesses; i++) {
@@ -19,7 +19,14 @@ export const GameBoard = (props: GameBoardProps) => {
     }
     return (
         <div className="game-board">
-            {numbers.map(number => <SegmentedTextBox key={number} lineNumber={number} numCharacter={props.numChars} isActive={number === currentGuessNumber} />)}
+            {numbers.map(number => 
+                <SegmentedTextBox 
+                    key={number} 
+                    lineNumber={number}
+                    numCharacter={props.numChars}
+                    isActive={number === currentGuessNumber}
+                />
+            )}
         </div>
     )
 }

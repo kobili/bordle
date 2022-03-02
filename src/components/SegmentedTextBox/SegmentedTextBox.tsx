@@ -23,7 +23,7 @@ const isAlphabetical = (character: string) => {
 
 export const SegmentedTextBox = (props: Props) => {
     const dispatch = useAppDispatch();
-    const currentGuess = useSelector(selectCurrentGuessNum);
+    const currentGuessNum = useSelector(selectCurrentGuessNum);
 
     const numbers: number[] = [];
     const initialInputs: string[] = [];
@@ -93,7 +93,7 @@ export const SegmentedTextBox = (props: Props) => {
                 <InputBox 
                     key={num} 
                     currentLetter={inputCharacters[num]} 
-                    isLockedIn={props.lineNumber < currentGuess && !props.isActive}/>)
+                    isLockedIn={props.lineNumber < currentGuessNum && !props.isActive}/>)
             }
         </div>
     );
