@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { InputBox } from "./InputBox";
+import { useAppDispatch } from "../../store/hooks";
 
 import './style.css';
+import { addGuess } from "../../store/slices/playerInputSlice";
 
 type Props = {
     numCharacter: number;
@@ -18,6 +20,7 @@ const isAlphabetical = (character: string) => {
 }
 
 export const SegmentedTextBox = (props: Props) => {
+    const dispatch = useAppDispatch();
 
     const numbers: number[] = [];
     const initialInputs: string[] = [];
@@ -69,6 +72,8 @@ export const SegmentedTextBox = (props: Props) => {
                         setInputCharacters(currentInputCharacters);
                         setActiveSquareIndex(currentSquareIndex === props.numCharacter - 1 ? currentSquareIndex : currentSquareIndex + 1);
                     }
+                } else if (event.key === 'Enter') {
+                    dispatch(addGuess(currentInputCharacters.join('')));
                 }
             }
         });

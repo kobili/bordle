@@ -11,3 +11,8 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+
+const middleWare = () => {
+    // checks if there have been 6 guesses if so, determines the game over state
+}

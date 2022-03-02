@@ -11,7 +11,7 @@ const initialState: PlayerInput = {
 };
 
 export const playerInputSlice = createSlice({
-    name: 'guesses',
+    name: 'playerInput',
     initialState,
     reducers: {
         addGuess: (state, action: PayloadAction<string>) => {
@@ -31,6 +31,7 @@ export const { addGuess, clearGuesses } = playerInputSlice.actions;
 
 // selectors
 export const selectGuesses = (state: RootState) => state.playerInput.guesses;
+export const selectNumGuesses = (state: RootState) => state.playerInput.guesses.length;
 
 // reducer
 export default playerInputSlice.reducer;
