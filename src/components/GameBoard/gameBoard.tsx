@@ -1,5 +1,7 @@
 import { SegmentedTextBox } from "../SegmentedTextBox/SegmentedTextBox";
 
+import './gameBoard.css';
+
 export type GameBoardProps = {
     numGuesses: number,
     numChars: number,
@@ -12,8 +14,8 @@ export const GameBoard = (props: GameBoardProps) => {
         numbers.push(i);
     }
     return (
-        <div id="game-board">
-            {numbers.map(number => <SegmentedTextBox numCharacter={props.numChars} isActive={number === 0}></SegmentedTextBox>)}
+        <div className="game-board">
+            {numbers.map(number => <SegmentedTextBox key={number} numCharacter={props.numChars} isActive={number === 0} />)}
         </div>
     )
 }

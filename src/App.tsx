@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 
 import { SegmentedTextBox } from './components/SegmentedTextBox/SegmentedTextBox';
 import { GameBoard } from './components/GameBoard/gameBoard';

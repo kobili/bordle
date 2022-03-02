@@ -6,6 +6,7 @@ import './style.css';
 type Props = {
     numCharacter: number;
     isActive: boolean;
+    key: number;
 }
 
 const isAlphabetical = (character: string) => {
