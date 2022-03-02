@@ -4,6 +4,7 @@ import { useAppDispatch } from "../../store/hooks";
 
 import './style.css';
 import { addGuess } from "../../store/slices/playerInputSlice";
+import { isValidWord } from "../../utils/words/wordsUtils";
 
 type Props = {
     numCharacter: number;
@@ -73,7 +74,13 @@ export const SegmentedTextBox = (props: Props) => {
                         setActiveSquareIndex(currentSquareIndex === props.numCharacter - 1 ? currentSquareIndex : currentSquareIndex + 1);
                     }
                 } else if (event.key === 'Enter') {
-                    dispatch(addGuess(currentInputCharacters.join('')));
+                    const guess = currentInputCharacters.join('');
+                    if (isValidWord(guess)) {
+                        dispatch(addGuess(guess));
+                    } else {
+                        alert(`${guess} is not a valid word`);  // TODO: replace this with something unobstructive
+                    }
+                    
                 }
             }
         });
