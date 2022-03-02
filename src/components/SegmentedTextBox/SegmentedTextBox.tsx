@@ -47,13 +47,14 @@ export const SegmentedTextBox = (props: Props) => {
 
 
     const keyPress = useKeyPress();
-    console.log(keyPress)
+    // console.log(keyPress)
 
     useEffect(() => {
         if (props.isActive) {
-            
             let currentInputCharacters = [...inputCharactersRef.current];
             let currentSquareIndex = activeSquareIndexRef.current;
+
+            const guess = currentInputCharacters.join('');
 
             if (keyPress.key === 'Backspace' && currentSquareIndex >= 0) {
                 if (currentInputCharacters[currentSquareIndex] === '') {
@@ -76,8 +77,7 @@ export const SegmentedTextBox = (props: Props) => {
                     setInputCharacters(currentInputCharacters);
                     setActiveSquareIndex(currentSquareIndex === props.numCharacter - 1 ? currentSquareIndex : currentSquareIndex + 1);
                 }
-            } else if (keyPress.key === 'Enter') {
-                const guess = currentInputCharacters.join('');
+            } else if (keyPress.key === 'Enter' && guess.length !== 0) {    // second clause prevents submitting when line is empty
                 if (isValidWord(guess)) {
                     dispatch(addGuess(guess));
                 } else {
