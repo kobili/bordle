@@ -3,8 +3,13 @@ import { InputBox } from "./InputBox";
 import { useAppDispatch, useKeyPress } from "../../store/hooks";
 
 import './style.css';
-import { addGuess } from "../../store/slices/playerInputSlice";
+import { addGuess, selectCurrentGuessNum } from "../../store/slices/playerInputSlice";
 import { isValidWord } from "../../utils/words/wordsUtils";
+import { useSelector } from "react-redux";
+import { selectTargetWord } from "../../store/slices/gameStateSlice";
+import { getStylesForLine } from "./tileStyles";
+
+import type { Style } from './tileStyles'
 
 type Props = {
     numCharacter: number;
@@ -22,6 +27,8 @@ const isAlphabetical = (character: string) => {
 
 export const SegmentedTextBox = (props: Props) => {
     const dispatch = useAppDispatch();
+    const currentGuessNum = useSelector(selectCurrentGuessNum);
+    const targetWord = useSelector(selectTargetWord);
 
     const numbers: number[] = [];
     const initialInputs: string[] = [];
@@ -45,9 +52,7 @@ export const SegmentedTextBox = (props: Props) => {
         _setActiveSquareIndex(value);
     }
 
-
     const keyPress = useKeyPress();
-    // console.log(keyPress)
 
     useEffect(() => {
         if (props.isActive) {
@@ -87,9 +92,24 @@ export const SegmentedTextBox = (props: Props) => {
         }
     }, [keyPress]);
 
+    const isLineLockedIn = props.lineNumber < currentGuessNum && !props.isActive;
+
+    let tileStyles: Style[];
+    if (isLineLockedIn) {
+        tileStyles = getStylesForLine(inputCharacters, targetWord);
+    }
+
     return (
         <div className="segmented-text-box">
-            {numbers.map(num => <InputBox key={num} currentLetter={inputCharacters[num]}></InputBox>)}
+            {numbers.map(num => {
+                return <InputBox 
+                            key={num} 
+                            index={num}
+                            currentLetter={inputCharacters[num]} 
+                            isLockedIn={isLineLockedIn}
+                            style={tileStyles !== undefined ? tileStyles[num] : undefined}
+                        />
+            })}
         </div>
     );
 }
