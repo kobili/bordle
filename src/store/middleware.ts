@@ -10,14 +10,14 @@ export const winLossCheckMiddleware:Middleware<{}, {playerInput: PlayerInput, ga
     if (action.type === "playerInput/addGuess") {
         let guesses = storeApi.getState().playerInput.guesses;
         let targetWord = storeApi.getState().gameState.targetWord;
-
         let gameProgress = storeApi.getState().gameState.gameProgress;
+        let numGuesses = storeApi.getState().gameState.numGuesses;
     
         if (guesses[guesses.length-1] === targetWord) {
             storeApi.dispatch(wonGame());
         }
     
-        if (guesses.length === 6 && gameProgress !== GameProgress.WON) {
+        if (guesses.length === numGuesses && gameProgress !== GameProgress.WON) {
             storeApi.dispatch(lostGame());
         }
     }

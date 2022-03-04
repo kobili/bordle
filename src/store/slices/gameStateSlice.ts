@@ -10,11 +10,13 @@ export enum GameProgress {
 export type GameState = {
     targetWord: string,
     gameProgress: GameProgress,
+    numGuesses: number,
 }
 
 const initialState: GameState = {
     targetWord: "DEEPS",
     gameProgress: GameProgress.IN_PROGRESS,
+    numGuesses: 6,
 }
 
 export const gameStateSlice = createSlice({
@@ -43,6 +45,6 @@ export const { updateTargetWord, wonGame, lostGame } = gameStateSlice.actions;
 // selectors
 export const selectGameProgress = (state: RootState) => state.gameState.gameProgress;
 export const selectTargetWord = (state: RootState) => state.gameState.targetWord;
-
+export const selectNumMaxGuesses = (state: RootState) => state.gameState.numGuesses;
 // reducer
 export default gameStateSlice.reducer;
