@@ -1,4 +1,13 @@
 export const validWords = [
+    "ANIME",
+    "CRANE",
+    "FROWN",
+    "DROWN",
+    "TROUT",
+    "TUPLE",
+    "TOUPE",
+    "COUPE",
+    "AMISS",
     "DEEPS",
     "SWEEP",
     "ABOUT",

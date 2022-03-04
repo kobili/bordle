@@ -19,16 +19,25 @@ export const GameBoard = (props: GameBoardProps) => {
     for (let i = 0; i < props.numGuesses; i++) {
         numbers.push(i);
     }
+
+    const dispatchKeyboardEvent = () => {
+        window.dispatchEvent(new KeyboardEvent('keydown', {
+            'key': 'a'
+          }));
+    }
     return (
-        <div className="game-board">
-            {numbers.map(number => 
-                <SegmentedTextBox 
-                    key={number} 
-                    lineNumber={number}
-                    numCharacter={props.numChars}
-                    isActive={number === currentGuessNumber && gameProgress === GameProgress.IN_PROGRESS}
-                />
-            )}
-        </div>
+        <>
+            <div className="game-board">
+                {numbers.map(number => 
+                    <SegmentedTextBox 
+                        key={number} 
+                        lineNumber={number}
+                        numCharacter={props.numChars}
+                        isActive={number === currentGuessNumber && gameProgress === GameProgress.IN_PROGRESS}
+                    />
+                )}
+            </div>
+            {/* <button onClick={dispatchKeyboardEvent}>a</button> */}
+        </>
     )
 }
