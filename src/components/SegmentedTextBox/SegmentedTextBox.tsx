@@ -37,6 +37,7 @@ export const SegmentedTextBox = (props: Props) => {
         initialInputs.push("");
     }
 
+    // handle keyboard inputs
     const [inputCharacters, _setInputCharacters] = useState(initialInputs);
     const [activeSquareIndex, _setActiveSquareIndex] = useState(0);
 
@@ -53,7 +54,6 @@ export const SegmentedTextBox = (props: Props) => {
     }
 
     const keyPress = useKeyPress();
-
     useEffect(() => {
         if (props.isActive) {
             let currentInputCharacters = [...inputCharactersRef.current];
@@ -90,8 +90,9 @@ export const SegmentedTextBox = (props: Props) => {
                 }
             }
         }
-    }, [keyPress]);
+    }, [keyPress, dispatch, props.isActive, props.numCharacter]);
 
+    // determine if this line's tiles need styling
     const isLineLockedIn = props.lineNumber < currentGuessNum && !props.isActive;
 
     let tileStyles: Style[];
