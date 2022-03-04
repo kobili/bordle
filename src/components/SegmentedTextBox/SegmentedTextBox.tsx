@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { InputBox } from "./InputBox";
 import { useAppDispatch, useKeyPress } from "../../store/hooks";
 
