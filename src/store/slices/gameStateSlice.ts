@@ -13,7 +13,7 @@ export type GameState = {
 }
 
 const initialState: GameState = {
-    targetWord: "DEPTH",
+    targetWord: "DEEPS",
     gameProgress: GameProgress.IN_PROGRESS,
 }
 

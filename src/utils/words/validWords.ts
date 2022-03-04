@@ -1,5 +1,6 @@
 export const validWords = [
     "DEEPS",
+    "SWEEP",
     "ABOUT",
     "ABOVE",
     "ABUSE",
