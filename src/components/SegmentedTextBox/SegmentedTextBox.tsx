@@ -102,7 +102,7 @@ export const SegmentedTextBox = (props: Props) => {
     return (
         <div className="segmented-text-box">
             {numbers.map(num => {
-                return <InputBox 
+                return <InputBox
                             key={num} 
                             index={num}
                             currentLetter={inputCharacters[num]} 
