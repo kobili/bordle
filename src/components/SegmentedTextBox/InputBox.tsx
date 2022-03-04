@@ -1,7 +1,4 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { selectTargetWord } from "../../store/slices/gameStateSlice";
-import { selectStyle, Style } from "./tileStyles";
+import { Style } from "./tileStyles";
 
 export type Props = {
     key: number;

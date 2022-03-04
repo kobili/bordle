@@ -14,7 +14,7 @@ export const useKeyPress = () => {
 
     const downHandler = (event: KeyboardEvent ) => {
         setKeyPressed({
-            ... keyPressed,
+            ...keyPressed,
             key: event.key
         });
     };
@@ -25,7 +25,7 @@ export const useKeyPress = () => {
         return () => {
         window.removeEventListener('keydown', downHandler);
         };
-    }, []);
+    });
 
     return keyPressed;
 };

@@ -14,8 +14,8 @@ export const GameBoard = (props: GameBoardProps) => {
 
     const currentGuessNumber = useSelector(selectCurrentGuessNum);  // will re-render after each guess
     const gameProgress = useSelector(selectGameProgress);
-    const numbers: number[] = [];
 
+    const numbers: number[] = [];
     for (let i = 0; i < props.numGuesses; i++) {
         numbers.push(i);
     }
