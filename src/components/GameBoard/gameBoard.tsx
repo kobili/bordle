@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import './gameBoard.css';
 import { selectCurrentGuessNum } from "../../store/slices/playerInputSlice";
 import { GameProgress, selectGameProgress } from "../../store/slices/gameStateSlice";
+import { Keyboard } from "../Keyboard/Keyboard";
 
 export type GameBoardProps = {
     numGuesses: number,
@@ -20,11 +21,6 @@ export const GameBoard = (props: GameBoardProps) => {
         numbers.push(i);
     }
 
-    const dispatchKeyboardEvent = () => {
-        window.dispatchEvent(new KeyboardEvent('keydown', {
-            'key': 'a'
-          }));
-    }
     return (
         <>
             <div className="game-board">
@@ -37,7 +33,7 @@ export const GameBoard = (props: GameBoardProps) => {
                     />
                 )}
             </div>
-            {/* <button onClick={dispatchKeyboardEvent}>a</button> */}
+            <Keyboard />
         </>
     )
 }

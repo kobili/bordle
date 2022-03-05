@@ -1,0 +1,43 @@
+button {
+    font-family: inherit;
+    font-weight: bold;
+    border: 0;
+    padding: 0;
+    margin: 0 6px 0 0;
+    height: 58px;
+    width: 43px;
+    max-width: 43px;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    background-color: #d3d6da;
+    /* color: var(--key-text-color); */
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.3);
+}
+
+.row {
+    display: flex;
+    width: 100%;
+    margin: 0 auto 8px;
+    touch-action: manipulation;
+}
+
+#keyboard {
+    display: block;
+    margin: 0 8px;
+    user-select: none;
+}
+
+.half {
+    flex: 0.5;
+}
+
+#keyboard-key-backspace, #keyboard-key-enter {
+    width: 65.4px;
+    max-width: 65.4px;
+}
