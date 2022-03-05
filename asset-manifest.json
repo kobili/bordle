@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/bordle/static/css/main.ff041427.css",
+    "main.js": "/bordle/static/js/main.1285480d.js",
+    "index.html": "/bordle/index.html",
+    "main.ff041427.css.map": "/bordle/static/css/main.ff041427.css.map",
+    "main.1285480d.js.map": "/bordle/static/js/main.1285480d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ff041427.css",
+    "static/js/main.1285480d.js"
+  ]
+}
