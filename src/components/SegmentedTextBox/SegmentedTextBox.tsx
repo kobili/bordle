@@ -90,7 +90,8 @@ export const SegmentedTextBox = (props: Props) => {
                 }
             }
         }
-    }, [keyPress, dispatch, props.isActive, props.numCharacter]);
+    }, [keyPress, dispatch, props.numCharacter /*, props.isActive*/]); // eslint-disable-line react-hooks/exhaustive-deps
+    // for some reason when props.isActive is included in the deps, the third line will automatically populate with the second line's last letter 🤷‍♂️
 
     // determine if this line's tiles need styling
     const isLineLockedIn = props.lineNumber < currentGuessNum && !props.isActive;

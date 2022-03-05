@@ -1,4 +1,6 @@
 export const validWords = [
+    "GORGE",
+    "GRAPH",
     "ANIME",
     "CRANE",
     "FROWN",
