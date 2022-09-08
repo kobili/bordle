@@ -1,9 +1,7 @@
 # Bordle
 A Wordle clone I built using React and Redux because I was bored.
 
-I got the list of possible words off some crappy website that only showed 500 5 letter words. If you want to add to the list, feel free to edit [`src/utils/words/validWords.ts`](https://github.com/kobili/bordle/blob/main/src/utils/words/validWords.ts) and open up a PR.
-
-The source code makes me cringe too 😆
+I got the list of possible words off some website that only showed 500 5 letter words. If you want to add to the list, feel free to edit [`src/utils/words/validWords.ts`](https://github.com/kobili/bordle/blob/main/src/utils/words/validWords.ts) and open up a PR.
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
